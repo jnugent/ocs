@@ -161,7 +161,7 @@ class PaperHandler extends Handler {
 			if ($version) foreach ($version->getContexts() as $context) {
 				if ($context->getDefineTerms()) {
 					$defineTermsContextId = $context->getContextId();
-					break;
+					return;
 				}
 			}
 		}
@@ -233,7 +233,7 @@ class PaperHandler extends Handler {
 			$buildingDao = DAORegistry::getDAO('BuildingDAO');
 
 			$room =& $roomDao->getRoom($paper->getRoomId());
-			if (!$room) break;
+			if (!$room) return;
 
 			$building =& $buildingDao->getBuilding($room->getBuildingId());
 			$templateMgr->assign_by_ref('room', $room);
